@@ -3,7 +3,6 @@
   "description": "基于arco-design-vue二次封装的组件库",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
