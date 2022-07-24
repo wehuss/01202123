@@ -6,7 +6,7 @@ hero:
   text: 基于arco-design-vue二次封装的组件库
   tagline: 还没动手...
   image:
-    src: /logo.png
+    src: /logo.svg
     alt: Arco Vue Pro Components
   actions:
     # - theme: brand
