@@ -28,7 +28,7 @@ type AutoComplete=AutoCompleteInstance['$props'] & {
   type:'autoComplete'
 }
 
-export interface FromItemConfig extends FormProps {
+export interface FromItemConfig extends FormItemProps {
   render: DataEntryComponents|AutoComplete;
 }
 
