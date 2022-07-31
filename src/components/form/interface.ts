@@ -1,4 +1,6 @@
-import { Form, FormItem, Input } from '@arco-design/web-vue'
+import {
+  FieldRule, Form, FormItem, Input,
+} from '@arco-design/web-vue'
 import { ConcreteComponent, VNodeProps } from 'vue'
 
 type RawProps = VNodeProps & {
@@ -32,7 +34,7 @@ type DataEntryComponents =
 
 // 移除并数据输入组件上没有的model等属性
 type RemoveRequired<T> = {
-  [P in keyof T]?: T[P];
+  -readonly [P in keyof T]?: T[P];
 };
 // ts水平过菜，无法理解发生了什么
 function GET_COMPONENT_PROPS<P>(
@@ -44,15 +46,17 @@ function GET_COMPONENT_PROPS(type: any) {
 const _inputProps = GET_COMPONENT_PROPS(Input)
 export type InputProps = typeof _inputProps;
 
+export type Rules='required'|'email'|'url'|'ip'
+const _formItemProps = GET_COMPONENT_PROPS(FormItem)
+type FormItemProps = typeof _formItemProps;
+export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
+  render?: DataEntryComponents;
+  rules?:FieldRule | FieldRule[]|Rules|Rules[]
+}
+
 const _formProps = GET_COMPONENT_PROPS(Form)
 type FormProps = typeof _formProps;
 
 export interface FormConfig extends FormProps {
   fields: FormItemConfig[];
-}
-
-const _formItemProps = GET_COMPONENT_PROPS(FormItem)
-type FormItemProps = typeof _formItemProps;
-export interface FormItemConfig extends FormItemProps {
-  render: DataEntryComponents;
 }
