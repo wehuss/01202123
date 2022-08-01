@@ -3,7 +3,7 @@ import {
 } from 'vue'
 import { Form, FormItem, Input } from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash'
-import { FormConfig, InputProps } from './interface'
+import { FormConfig } from './interface'
 
 const omit = (obj:any, key:string) => {
   const _obj = cloneDeep(obj)
