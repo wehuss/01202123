@@ -32,7 +32,7 @@ type DataEntryComponents =
   | 'treeSelect'
   | 'upload';
 
-// 移除并数据输入组件上没有的model等属性
+// 移除数据输入组件上必选属性
 type RemoveRequired<T> = {
   -readonly [P in keyof T]?: T[P];
 };

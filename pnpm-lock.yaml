@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@arco-design/web-vue': ^2.33.1
+  '@types/lodash': ^4.14.182
   '@typescript-eslint/eslint-plugin': ^4.18.0
   '@typescript-eslint/parser': ^4.12.0
   '@vitejs/plugin-vue': ^3.0.0
@@ -11,11 +12,16 @@ specifiers:
   eslint-import-resolver-typescript: ^2.4.0
   eslint-plugin-import: ^2.22.1
   eslint-plugin-vue: ^7.7.0
+  lodash: ^4.17.21
   typescript: ^4.6.4
   vite: ^3.0.0
   vitepress: 1.0.0-alpha.4
   vue: ^3.2.37
   vue-tsc: ^0.38.4
+
+dependencies:
+  '@types/lodash': 4.14.182
+  lodash: 4.17.21
 
 devDependencies:
   '@arco-design/web-vue': 2.33.1_vue@3.2.37
@@ -608,6 +614,10 @@ packages:
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
+
+  /@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
+    dev: false
 
   /@types/web-bluetooth/0.0.14:
     resolution: {integrity: sha512-5d2RhCard1nQUC3aHcq/gHzWYO6K0WJmAbjO7mQJgCQKtZpgXxv1rOM6O/dBDhDYYVutk1sciOgNSe+5YyfM8A==}
@@ -2234,7 +2244,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
