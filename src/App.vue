@@ -14,7 +14,14 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
-  <ap-form />
+  <ap-form :config="{
+    fields:[
+      {
+        fields:'test'
+      }
+    ]
+  }"
+  />
 </template>
 
 <style scoped>
