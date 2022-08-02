@@ -3,7 +3,7 @@ import {
 } from 'vue'
 import { Form, FormItem, Input } from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash'
-import { FormConfig } from './interface'
+import { FormConfig, FormItemRender } from './interface'
 
 const omit = (obj:any, key:string) => {
   const _obj = cloneDeep(obj)
@@ -21,6 +21,11 @@ export default defineComponent({
   },
   setup(props) {
     const { formConfig } = toRefs(props)
+    // const renderDataEntryComponent=(renderConfig:FormItemRender)=>{
+    //   switch(typeof renderConfig){
+    //     case 'function'
+    //   }
+    // }
     return () => <Form {
       ...omit(formConfig.value, 'fields')
     } >
