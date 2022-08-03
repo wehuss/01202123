@@ -1,11 +1,13 @@
 import { omit } from '@/utils'
 import { FormItem } from '@arco-design/web-vue'
-import { defineComponent, PropType, toRefs } from 'vue'
+import {
+  defineComponent, inject, PropType, toRefs,
+} from 'vue'
 import {
   dataEntryComponents,
   firstLetterToUpperCase,
 } from './data-entry-components'
-import { FormItemConfig } from './interface'
+import { FormItemConfig, FORM_INJECT_KEY } from './interface'
 
 export default defineComponent({
   props: {
@@ -16,6 +18,7 @@ export default defineComponent({
   },
   setup(props) {
     const { config } = toRefs(props)
+    const model = inject(FORM_INJECT_KEY)
 
     const getComponentPlaceholder = (label = '', componentName: string) => {
       let placeholder
@@ -57,12 +60,21 @@ export default defineComponent({
       }
     }
 
+    // onMounted(() => {
+    //   console.log('model', model)
+    // })
+
     return () => {
-      const DataEntryComponent = () => renderDataEntryComponent(config.value)
+      const DataEntryComponent = renderDataEntryComponent(config.value) as any
       return (
-        <FormItem {...omit(config.value, 'render')}>
-          <DataEntryComponent />
+        <>
+        {
+          model && <FormItem {...omit(config.value, 'render')}>
+            {model[config.value.field]}
+          <DataEntryComponent v-model={model[config.value.field]} />
         </FormItem>
+        }
+        </>
       )
     }
   },

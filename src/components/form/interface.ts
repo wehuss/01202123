@@ -1,7 +1,9 @@
 import {
-  FieldRule, Form, FormItem, Input,
+  FieldRule,
 } from '@arco-design/web-vue'
-import { ConcreteComponent, VNode, VNodeProps } from 'vue'
+import {
+  InjectionKey, VNode,
+} from 'vue'
 import {
   DataEntryComponents,
   DataEntryComponentsKey,
@@ -46,11 +48,19 @@ export type CustomRules = 'required' | 'email' | 'url' | 'ip'|'phone';
 
 export type FormItemRender=DataEntryComponentsKey | DataEntryComponents | (() => VNode)
 export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
+  field:string,
   render?: FormItemRender;
   rules?: FieldRule | FieldRule[] | CustomRules | CustomRules[];
+  defaultValue?:any
 }
 
-export interface FormConfig extends FormProps {
-  model: Record<string, any> | undefined;
+export interface FormConfig extends Omit<FormProps, 'modadl'> {
   fields: FormItemConfig[];
 }
+
+export type BaseModel={
+  [key: string]: any;
+}
+
+// eslint-disable-next-line symbol-description
+export const FORM_INJECT_KEY = Symbol() as InjectionKey<BaseModel>
