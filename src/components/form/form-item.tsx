@@ -1,7 +1,7 @@
 import { omit } from '@/utils'
 import { FormItem } from '@arco-design/web-vue'
 import {
-  defineComponent, inject, PropType, toRefs,
+  defineComponent, inject, PropType, toRefs, createVNode,
 } from 'vue'
 import {
   dataEntryComponents,
@@ -36,22 +36,22 @@ export default defineComponent({
     const renderDataEntryComponent = ({ render, label }: FormItemConfig) => {
       switch (typeof render) {
         default:
-          return <dataEntryComponents.Input placeholder={getComponentPlaceholder(label, 'input')} />
+          return (
+            <dataEntryComponents.Input
+              placeholder={getComponentPlaceholder(label, 'input')}
+            />
+          )
         case 'string': {
           const _component = getComponent(render)
           return (
-            <_component
-              placeholder={getComponentPlaceholder(label, render)}
-            />
+            <_component placeholder={getComponentPlaceholder(label, render)} />
           )
         }
         case 'object': {
           const _component = getComponent(render.component)
           return (
             <_component
-              placeholder={
-                getComponentPlaceholder(label, render.component)
-              }
+              placeholder={getComponentPlaceholder(label, render.component)}
             />
           )
         }
@@ -60,21 +60,21 @@ export default defineComponent({
       }
     }
 
-    // onMounted(() => {
-    //   console.log('model', model)
-    // })
-
     return () => {
-      const DataEntryComponent = renderDataEntryComponent(config.value) as any
-      return (
-        <>
+      const DataEntryComponent = renderDataEntryComponent(config.value)
+      return createVNode(
+        FormItem,
         {
-          model && <FormItem {...omit(config.value, 'render')}>
-            {model[config.value.field]}
-          <DataEntryComponent v-model={model[config.value.field]} />
-        </FormItem>
-        }
-        </>
+          ...omit(config.value, 'render'),
+        },
+        () => [
+          createVNode(DataEntryComponent, {
+            modelValue: model?.[config.value.field],
+            'onUpdate:modelValue': (value: any) => {
+              if (model) model[config.value.field] = value
+            },
+          }),
+        ],
       )
     }
   },
