@@ -21,26 +21,26 @@ const ruleRegExps:{
 }
 
 export const customRules:{
-  [key in CustomRules]:(label:string)=>FieldRule
+  [key in CustomRules]:(label:string|undefined)=>FieldRule
 } = {
-  required: (label:string) => ({
+  required: (label?:string|undefined) => ({
     required: true,
-    message: `${label}不能为空`,
+    message: label ? `${label}不能为空` : '此字段不能为空',
   }),
   email: () => ({
     message: '请输入正确的邮箱',
-    match: ruleRegExps.email,
+    type: 'email',
   }),
   phone: () => ({
     match: ruleRegExps.phone,
     message: '请输入正确的手机号',
   }),
   url: () => ({
-    match: ruleRegExps.url,
+    type: 'url',
     message: '请输入正确的url',
   }),
   ip: () => ({
-    match: ruleRegExps.ip,
+    type: 'ip',
     message: '请输入正确的ip',
   }),
 }
@@ -50,7 +50,7 @@ export type FormItemRender=DataEntryComponentsKey | DataEntryComponents | (() =>
 export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
   field:string,
   render?: FormItemRender;
-  rules?: FieldRule | FieldRule[] | CustomRules | CustomRules[];
+  rules?: FieldRule | Array<FieldRule|CustomRules> | CustomRules ;
   defaultValue?:any
 }
 

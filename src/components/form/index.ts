@@ -8,3 +8,10 @@ const Form = Object.assign(_Form, {
 })
 
 export default Form
+
+export type {
+  customRules,
+  FormItemRender,
+  FormConfig,
+  FormItemConfig,
+} from './interface'

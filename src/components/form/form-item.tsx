@@ -1,13 +1,15 @@
 import { omit } from '@/utils'
 import { FormItem } from '@arco-design/web-vue'
 import {
-  defineComponent, inject, PropType, toRefs, createVNode,
+  defineComponent, inject, PropType, toRefs, createVNode, computed,
 } from 'vue'
 import {
   dataEntryComponents,
   firstLetterToUpperCase,
 } from './data-entry-components'
-import { FormItemConfig, FORM_INJECT_KEY } from './interface'
+import {
+  CustomRules, customRules, FormItemConfig, FORM_INJECT_KEY,
+} from './interface'
 
 export default defineComponent({
   props: {
@@ -19,6 +21,27 @@ export default defineComponent({
   setup(props) {
     const { config } = toRefs(props)
     const model = inject(FORM_INJECT_KEY)
+    const rules = computed(() => {
+      const _rules = config.value.rules
+      switch (typeof _rules) {
+        case 'undefined':
+          return []
+        case 'string':
+          return customRules[_rules as CustomRules](config.value.label)
+        default:
+        {
+          if (Array.isArray(_rules)) {
+            return _rules.map((rule) => {
+              if (typeof rule === 'object') {
+                return rule
+              }
+              return customRules[rule](config.value.label)
+            })
+          }
+          return _rules
+        }
+      }
+    })
 
     const getComponentPlaceholder = (label = '', componentName: string) => {
       let placeholder
@@ -51,7 +74,10 @@ export default defineComponent({
           const _component = getComponent(render.component)
           return (
             <_component
-              placeholder={getComponentPlaceholder(label, render.component)}
+              placeholder={
+                (render as any)?.placeholder
+                ?? getComponentPlaceholder(label, render.component)
+              }
             />
           )
         }
@@ -65,7 +91,8 @@ export default defineComponent({
       return createVNode(
         FormItem,
         {
-          ...omit(config.value, 'render'),
+          ...omit(config.value, 'render', 'rules'),
+          rules: rules.value,
         },
         () => [
           createVNode(DataEntryComponent, {
