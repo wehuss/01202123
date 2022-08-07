@@ -78,6 +78,9 @@ export default defineComponent({
                 (render as any)?.placeholder
                 ?? getComponentPlaceholder(label, render.component)
               }
+              {
+                ...omit(render, 'component')
+              }
             />
           )
         }

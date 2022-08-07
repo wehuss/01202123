@@ -50,7 +50,9 @@ export default defineComponent({
       })
     })
     return () => (
-      <Form config={config.value} ref={formRef} />
+      <div>
+        <Form config={config.value} ref={formRef} />
+      </div>
     )
   },
 })
