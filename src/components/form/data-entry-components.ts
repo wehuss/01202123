@@ -29,6 +29,7 @@ import {
   Form,
 } from '@arco-design/web-vue'
 import { ConcreteComponent } from 'vue'
+import dayjs from 'dayjs'
 
 export const dataEntryComponents = {
   AutoComplete,

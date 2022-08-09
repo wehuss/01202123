@@ -31,8 +31,6 @@ export default defineComponent({
     config: {
       type: Object as PropType<FormConfig>,
       required: true,
-      default: () => ({
-      }),
     },
   },
   setup(props, {
