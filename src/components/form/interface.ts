@@ -54,7 +54,7 @@ export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
   defaultValue?:any
 }
 
-export interface FormConfig extends Omit<FormProps, 'modadl'> {
+export interface FormConfig extends Omit<FormProps, 'model'> {
   fields: FormItemConfig[];
 }
 
