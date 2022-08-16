@@ -2,6 +2,7 @@ import {
   FieldRule,
 } from '@arco-design/web-vue'
 import {
+  CSSProperties,
   InjectionKey, Ref, VNode,
 } from 'vue'
 import {
@@ -46,12 +47,17 @@ export const customRules:{
 }
 export type CustomRules = 'required' | 'email' | 'url' | 'ip'|'phone';
 
-export type FormItemRender=DataEntryComponentsKey | DataEntryComponents | (() => VNode)
+export type FormItemRender=DataEntryComponentsKey | DataEntryComponents &{
+  style?:CSSProperties,
+  'v-slots'?:any
+} | (() => VNode) | (() => JSX.Element)
 export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
   field:string,
   render?: FormItemRender;
   rules?: FieldRule | Array<FieldRule|CustomRules> | CustomRules ;
   defaultValue?:any
+  style?:CSSProperties,
+  'v-slots'?:any
 }
 
 export interface FormConfig extends Omit<FormProps, 'model'> {
