@@ -1,5 +1,5 @@
 import {
-  defineComponent, PropType, provide, ref, toRefs,
+  defineComponent, PropType, provide, ref, toRefs, watch,
 } from 'vue'
 import { Form } from '@arco-design/web-vue'
 import { omit } from '@/utils/index'
@@ -19,6 +19,7 @@ function createModel(
   return fields.reduce(
     (model, { field, defaultValue }) => {
       model[field] = oldModel[field] ?? defaultValue ?? null
+      // console.log('model[field]', model[field], model, oldModel)
       return model
     },
     {} as BaseModel,
@@ -40,8 +41,14 @@ export default defineComponent({
 
     const { config } = toRefs(props)
     const model = ref(createModel({}, config.value.fields))
+
+    watch(() => config, () => {
+      model.value = createModel({}, config.value.fields)
+    }, {
+      deep: true,
+    })
     // console.log('model', model)
-    provide(FORM_INJECT_KEY, model.value)
+    provide(FORM_INJECT_KEY, model)
 
     expose({
       formRef,
@@ -50,7 +57,7 @@ export default defineComponent({
 
     return {
       renderFunc: () => (
-        <Form {...omit(config.value, 'fields')} model={model} ref={formRef}>
+        <Form {...omit(config.value, 'fields')} model={model.value} ref={formRef}>
           {config.value.fields.map((field) => (
             <FormItem config={field} />
           ))}

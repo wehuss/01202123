@@ -2,7 +2,7 @@ import {
   FieldRule,
 } from '@arco-design/web-vue'
 import {
-  InjectionKey, VNode,
+  InjectionKey, Ref, VNode,
 } from 'vue'
 import {
   DataEntryComponents,
@@ -63,4 +63,4 @@ export type BaseModel={
 }
 
 // eslint-disable-next-line symbol-description
-export const FORM_INJECT_KEY = Symbol() as InjectionKey<BaseModel>
+export const FORM_INJECT_KEY = Symbol() as InjectionKey<Ref<BaseModel>>

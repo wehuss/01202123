@@ -1,7 +1,7 @@
 {
   "name": "arco-vue-pro-components",
   "description": "基于arco-design-vue二次封装的组件库",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "files": [
     "dist"
   ],
@@ -39,7 +39,9 @@
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vitepress": "1.0.0-alpha.4",
-    "vue-tsc": "^0.38.4"
+    "vue-tsc": "^0.38.4",
+    "vue": "^3.2.37",
+    "@arco-design/web-vue": "latest"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -53,8 +55,6 @@
     }
   },
   "dependencies": {
-    "dayjs": "^1.11.4",
-    "vue": "^3.2.37",
-    "@arco-design/web-vue": "latest"
+    "dayjs": "^1.11.4"
   }
 }

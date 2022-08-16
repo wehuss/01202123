@@ -99,9 +99,9 @@ export default defineComponent({
         },
         () => [
           createVNode(DataEntryComponent, {
-            modelValue: model?.[config.value.field],
+            modelValue: model?.value[config.value.field],
             'onUpdate:modelValue': (value: any) => {
-              if (model) model[config.value.field] = value
+              if (model?.value) model.value[config.value.field] = value
             },
           }),
         ],
