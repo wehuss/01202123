@@ -1,9 +1,11 @@
 import {
+  computed,
   defineComponent, PropType, provide, ref, toRefs, watch,
 } from 'vue'
 import { Form } from '@arco-design/web-vue'
 import { omit } from '@/utils/index'
 import { FormInstance } from '@arco-design/web-vue/es/form'
+import { cloneDeep } from 'lodash'
 import {
   BaseModel, FormConfig, FormItemConfig, FORM_INJECT_KEY,
 } from './interface'
@@ -47,6 +49,16 @@ export default defineComponent({
     }, {
       deep: true,
     })
+
+    const computedConfig = computed(() => {
+      const _config = cloneDeep(config.value)
+      _config.fields = _config.fields.filter((field) => {
+        if (typeof field.hidden === 'function') return !field.hidden(model.value)
+        return !field.hidden
+      })
+
+      return _config
+    })
     // console.log('model', model)
     provide(FORM_INJECT_KEY, model)
 
@@ -57,8 +69,8 @@ export default defineComponent({
 
     return {
       renderFunc: () => (
-        <Form {...omit(config.value, 'fields')} model={model.value} ref={formRef}>
-          {config.value.fields.map((field) => (
+        <Form {...omit(computedConfig.value, 'fields')} model={model.value} ref={formRef}>
+          {computedConfig.value.fields.map((field) => (
             <FormItem config={field} />
           ))}
         </Form>

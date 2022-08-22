@@ -94,12 +94,6 @@ export default defineComponent({
 
     return () => {
       const DataEntryComponent = renderDataEntryComponent(config.value)
-      console.log('test', createVNode(DataEntryComponent, {
-        modelValue: model?.value[config.value.field],
-        'onUpdate:modelValue': (value: any) => {
-          if (model?.value) model.value[config.value.field] = value
-        },
-      }))
       return createVNode(
         FormItem,
         {

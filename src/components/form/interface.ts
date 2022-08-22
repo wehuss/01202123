@@ -48,7 +48,7 @@ export const customRules:{
 export type CustomRules = 'required' | 'email' | 'url' | 'ip'|'phone';
 
 export type FormItemRender=DataEntryComponentsKey | DataEntryComponents &{
-  style?:CSSProperties,
+  style?:CSSProperties
   'v-slots'?:any
 } | (() => VNode) | (() => JSX.Element)
 export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
@@ -56,8 +56,9 @@ export interface FormItemConfig extends Omit<FormItemProps, 'rules'> {
   render?: FormItemRender;
   rules?: FieldRule | Array<FieldRule|CustomRules> | CustomRules ;
   defaultValue?:any
-  style?:CSSProperties,
+  style?:CSSProperties
   'v-slots'?:any
+  hidden?:boolean|((model:any)=>boolean)
 }
 
 export interface FormConfig extends Omit<FormProps, 'model'> {

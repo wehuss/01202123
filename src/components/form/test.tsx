@@ -31,6 +31,7 @@ export default defineComponent({
           rules: ['required', 'email'],
           validateTrigger: ['input'],
           render: 'inputPassword',
+          hidden: (model) => model.test === '2',
         },
       ],
     })
