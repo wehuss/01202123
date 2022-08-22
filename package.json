@@ -1,7 +1,7 @@
 {
   "name": "arco-vue-pro-components",
   "description": "基于arco-design-vue二次封装的组件库",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "files": [
     "dist"
   ],
